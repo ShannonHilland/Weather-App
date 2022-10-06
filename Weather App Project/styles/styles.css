@@ -1,0 +1,86 @@
+body {
+  max-width: 600px;
+  color: black;
+  display: block;
+  margin: 0 auto;
+  background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+#submit-button {
+  background-color: rgb(237, 243, 249, 0.1);
+  color: black;
+  border-color: black;
+  box-shadow: 1px 1px 2px rgb(71, 71, 71);
+}
+#submit-button:hover {
+  background-color: rgb(237, 243, 249, 0.4);
+}
+#search-bar {
+  box-shadow: 1px 1px 2px rgb(71, 71, 71);
+}
+
+#current-location-icon {
+  padding-left: 5px;
+  font-size: 25px;
+}
+nav {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.card {
+  margin: 0 auto;
+  max-width: 450px;
+  text-align: center;
+  border-width: 2px;
+  box-shadow: 5px 5px 5px black;
+  border-color: #d968bb;
+  background-color: transparent;
+}
+h1 {
+  font-size: 40px;
+  text-transform: capitalize;
+}
+h2 {
+  font-size: 40px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+#current-weather-symbol {
+  font-size: 50px;
+  text-shadow: 4px 4px 5px rgb(22, 22, 22);
+  margin-bottom: 10px;
+}
+#current-weather-dsc {
+  margin-bottom: 15px;
+  text-transform: capitalize;
+}
+.extra-details {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#fahrenheit-button,
+#celsius-button {
+  color: black;
+}
+.extra-details {
+  font-size: 14px;
+}
+.card-group {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.card-body {
+  padding: 10px 20px;
+}
+.card-highs {
+  padding: 10px 0;
+  font-size: 20px;
+}
+.card-icon {
+  font-size: 50px;
+  padding: 20px 0;
+  text-shadow: 4px 4px 5px rgb(22, 22, 22);
+}
+.card-text {
+  font-size: 15px;
+}
