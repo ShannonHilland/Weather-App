@@ -56,6 +56,7 @@ function iconDisplay(response) {
 }
 function changeTemp(response) {
   let temperature = Math.round(response.data.main.temp);
+  celsiusTemperature = response.data.main.temp;
   let tempShown = document.querySelector("#current-temp");
   tempShown.innerHTML = temperature;
 }
@@ -97,7 +98,7 @@ form.addEventListener("submit", changeCity);
 function changeToCelsius(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "25";
+  currentTemp.innerHTML = Math.round(celsiusTemperature);
   document.getElementById("fahrenheit-button").style.color = "gray";
   document.getElementById("celsius-button").style.color = "black";
 }
@@ -107,12 +108,15 @@ celsiusButton.addEventListener("click", changeToCelsius);
 function changeToFahrenheit(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "77";
+  let farhenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+  currentTemp.innerHTML = farhenheitTemperature;
   document.getElementById("fahrenheit-button").style.color = "black";
   document.getElementById("celsius-button").style.color = "gray";
 }
 let fahrenheitButton = document.querySelector("#fahrenheit-button");
 fahrenheitButton.addEventListener("click", changeToFahrenheit);
+
+let celsiusTemperature = null;
 
 function currentLocationDetails(response) {
   let city = document.querySelector("h1");
