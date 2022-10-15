@@ -36,6 +36,24 @@ function dateAndTime() {
 }
 dateAndTime();
 
+function defaultDisplay() {
+  let apiURL =
+    "https://api.openweathermap.org/data/2.5/weather?q=Saskatoon&appid=cf6b50b908fa2e0baca3eed8a569a5f6&units=metric";
+  axios.get(apiURL).then(changeTemp);
+  axios.get(apiURL).then(searchedCity);
+  axios.get(apiURL).then(iconDisplay);
+  document.getElementById("fahrenheit-button").style.color = "gray";
+}
+defaultDisplay();
+
+function iconDisplay(response) {
+  let currentWeatherIcon = document.querySelector("#current-weather-icon");
+  let currentIconNumber = response.data.weather[0].icon;
+  currentWeatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+}
 function changeTemp(response) {
   let temperature = Math.round(response.data.main.temp);
   let tempShown = document.querySelector("#current-temp");
@@ -43,6 +61,7 @@ function changeTemp(response) {
 }
 
 function searchedCity(response) {
+  console.log(response);
   let city = document.querySelector("h1");
   let newCity = response.data.name;
   let countryName = response.data.sys.country;
@@ -69,6 +88,7 @@ function changeCity(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${newCity.value}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(changeTemp);
   axios.get(apiUrl).then(searchedCity);
+  axios.get(apiUrl).then(iconDisplay);
 }
 
 let form = document.querySelector("form");
@@ -78,6 +98,8 @@ function changeToCelsius(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = "25";
+  document.getElementById("fahrenheit-button").style.color = "gray";
+  document.getElementById("celsius-button").style.color = "black";
 }
 let celsiusButton = document.querySelector("#celsius-button");
 celsiusButton.addEventListener("click", changeToCelsius);
@@ -86,6 +108,8 @@ function changeToFahrenheit(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = "77";
+  document.getElementById("fahrenheit-button").style.color = "black";
+  document.getElementById("celsius-button").style.color = "gray";
 }
 let fahrenheitButton = document.querySelector("#fahrenheit-button");
 fahrenheitButton.addEventListener("click", changeToFahrenheit);
@@ -117,6 +141,7 @@ function showCurrentPosition(position) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(changeTemp);
   axios.get(apiUrl).then(currentLocationDetails);
+  axios.get(apiUrl).then(iconDisplay);
 }
 
 function currentLocation(event) {
