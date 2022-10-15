@@ -57,6 +57,7 @@ function iconDisplay(response) {
 function changeTemp(response) {
   let temperature = Math.round(response.data.main.temp);
   celsiusTemperature = response.data.main.temp;
+  perceivedCelsiusTemperature = response.data.main.feels_like;
   let tempShown = document.querySelector("#current-temp");
   tempShown.innerHTML = temperature;
 }
@@ -99,6 +100,10 @@ function changeToCelsius(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = Math.round(celsiusTemperature);
+  let feelsLike = document.querySelector("#feels-like");
+  feelsLike.innerHTML = `Feels Like: ${Math.round(
+    perceivedCelsiusTemperature
+  )} °`;
   document.getElementById("fahrenheit-button").style.color = "gray";
   document.getElementById("celsius-button").style.color = "black";
 }
@@ -110,6 +115,10 @@ function changeToFahrenheit(event) {
   let currentTemp = document.querySelector("#current-temp");
   let farhenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
   currentTemp.innerHTML = farhenheitTemperature;
+  let feelsLike = document.querySelector("#feels-like");
+  feelsLike.innerHTML = `Feels Like: ${Math.round(
+    (perceivedCelsiusTemperature * 9) / 5 + 32
+  )} °`;
   document.getElementById("fahrenheit-button").style.color = "black";
   document.getElementById("celsius-button").style.color = "gray";
 }
@@ -117,6 +126,7 @@ let fahrenheitButton = document.querySelector("#fahrenheit-button");
 fahrenheitButton.addEventListener("click", changeToFahrenheit);
 
 let celsiusTemperature = null;
+let perceivedCelsiusTemperature = null;
 
 function currentLocationDetails(response) {
   let city = document.querySelector("h1");
