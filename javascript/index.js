@@ -54,25 +54,42 @@ function iconDisplay(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 }
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
 function displayForecast(response) {
+  console.log(response.data);
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   let days = ["Sun", "Mon", "Tue"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
   <div class="col">
-      <h3 class="card-title" class="day">${day}</h3>
+      <h3 class="card-title" class="day">${formatForecastDay(
+        forecastDay.dt
+      )}</h3>
          <div class="card-highs">
-         <span class="forecast-high">23 /</span>
-         <span class="forecast-low"> 13</span>
+         <span class="forecast-high">${Math.round(
+           forecastDay.temp.max
+         )}° </span>
+         <span class="forecast-low"> ${Math.round(forecastDay.temp.min)}°</span>
          </div>
-      <div class="card-icon" class="forecast-icon">🌤</div>
-      <div class="card-text" class="forecast-dsc">Partly Cloudy</div>
+      <img class="forecast-icon" src="http://openweathermap.org/img/wn/${
+        forecastDay.weather[0].icon
+      }@2x.png" width=60px>
+      <div class="card-text" id="forecast-dsc">${
+        forecastDay.weather[0].description
+      }</div>
    </div>
   `;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
@@ -80,8 +97,9 @@ function displayForecast(response) {
 function forecastcoords(response) {
   let lon = response.coord.lon;
   let lat = response.coord.lat;
+  let unit = "metric";
   let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
   axios.get(apiUrl).then(displayForecast);
 }
 function changeTemp(response) {
@@ -94,7 +112,6 @@ function changeTemp(response) {
 }
 
 function searchedCity(response) {
-  console.log(response);
   let city = document.querySelector("h1");
   let newCity = response.data.name;
   let countryName = response.data.sys.country;

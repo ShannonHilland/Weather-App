@@ -1,10 +1,11 @@
 body {
-  max-width: 600px;
+  max-width: 750px;
   color: black;
   display: block;
   margin: 0 auto;
   background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
 }
+
 #submit-button {
   background-color: rgb(237, 243, 249, 0.1);
   color: black;
@@ -28,12 +29,13 @@ nav {
 }
 .card {
   margin: 0 auto;
-  max-width: 450px;
+  max-width: 700px;
   text-align: center;
   border-width: 2px;
   box-shadow: 5px 5px 5px black;
   border-color: #d968bb;
   background-color: transparent;
+  margin-bottom: 15px;
 }
 h1 {
   font-size: 40px;
@@ -43,6 +45,9 @@ h2 {
   font-size: 40px;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+h3 {
+  font-size: 20px;
 }
 #current-weather-icon {
   width: 100px;
@@ -78,9 +83,10 @@ h2 {
 }
 .card-highs {
   padding: 10px 0;
-  font-size: 20px;
+  font-size: 15px;
 }
-.card-icon {
+.card-icon,
+.forecast-icon {
   font-size: 50px;
   padding: 20px 0;
   text-shadow: 4px 4px 5px rgb(22, 22, 22);
@@ -88,4 +94,22 @@ h2 {
 }
 .card-text {
   font-size: 15px;
+}
+
+#forecast-dsc {
+  text-transform: capitalize;
+}
+.day {
+  font-size: 10px;
+}
+.forecast-low {
+  color: rgb(100, 97, 97);
+}
+#forecast {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+p {
+  text-align: center;
+  font-size: 12px;
 }
