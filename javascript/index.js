@@ -54,12 +54,37 @@ function iconDisplay(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 }
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  forecastHTML =
+    forecastHTML +
+    `
+  <div class="col">
+      <h3 class="card-title" id="day">Sun</h3>
+         <div class="card-highs"id="high">23/13</div>
+      <div class="card-icon" id="icon">🌤</div>
+      <div class="card-text" id="dsc">Partly Cloudy</div>
+   </div>
+  `;
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+function forecastcoords(response) {
+  let lon = response.coord.lon;
+  let lat = response.coord.lat;
+  let apiKey = "b400ae3b711a616262d18b0ca2cbe78f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 function changeTemp(response) {
   let temperature = Math.round(response.data.main.temp);
   celsiusTemperature = response.data.main.temp;
   perceivedCelsiusTemperature = response.data.main.feels_like;
   let tempShown = document.querySelector("#current-temp");
   tempShown.innerHTML = temperature;
+  forecastcoords(response.data);
 }
 
 function searchedCity(response) {

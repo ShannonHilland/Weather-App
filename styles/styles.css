@@ -68,9 +68,10 @@ h2 {
 .extra-details {
   font-size: 14px;
 }
-.card-group {
+.col {
   margin-top: 20px;
   margin-bottom: 30px;
+  text-align: center;
 }
 .card-body {
   padding: 10px 20px;
