@@ -58,16 +58,22 @@ function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  forecastHTML =
-    forecastHTML +
-    `
+  let days = ["Sun", "Mon", "Tue"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
   <div class="col">
-      <h3 class="card-title" id="day">Sun</h3>
-         <div class="card-highs"id="high">23/13</div>
-      <div class="card-icon" id="icon">🌤</div>
-      <div class="card-text" id="dsc">Partly Cloudy</div>
+      <h3 class="card-title" class="day">${day}</h3>
+         <div class="card-highs">
+         <span class="forecast-high">23 /</span>
+         <span class="forecast-low"> 13</span>
+         </div>
+      <div class="card-icon" class="forecast-icon">🌤</div>
+      <div class="card-text" class="forecast-dsc">Partly Cloudy</div>
    </div>
   `;
+  });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
